@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MusicStore.Persistence;
 using MusicStore.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Registering Services
+//Registering Context
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
+});
+
+//Region permite agrupar bloques de codigo
+#region Registering Services
 builder.Services.AddSingleton<GenreRepository>();
+#endregion
 
 var app = builder.Build();
 
