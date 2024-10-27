@@ -1,4 +1,7 @@
-using MusicStore.Repositories;
+using Microsoft.EntityFrameworkCore;
+using MusicStore.Persistence;
+using MusicStore.Repositories.implementations;
+using MusicStore.Repositories.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Registering Services
-builder.Services.AddSingleton<GenreRepository>();
+//Registering Context
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
+});
+
+//Region permite agrupar bloques de codigo
+#region Registering Services
+builder.Services.AddScoped<IGenreRepository, GenreRepository>(); // Se modifica la inyeción de dependencia cambiando a Scope y de agrega tanto la interface como la clase
+#endregion
 
 var app = builder.Build();
 
