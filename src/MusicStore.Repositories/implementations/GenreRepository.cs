@@ -20,7 +20,12 @@ public class GenreRepository : IGenreRepository
 
     public async Task<Genre?> GetAsync(int id) //el signo ? en el nombre del método indica que puede devolver un valor Nulo
     {
-        return await context.Genres.FirstOrDefaultAsync(x => x.Id == id); // FisrtOrDefault --> en caso no encuentre el Id enviado devuelve Nulo
+        var item = await context.Genres.FirstOrDefaultAsync(x => x.Id == id); // FisrtOrDefault --> en caso no encuentre el Id enviado devuelve Nulo
+
+        if (item is not null)
+            return item;
+        else
+            throw new InvalidOperationException($"No se encontro el registro con id: {id}");
     }
 
     public async Task<int> AddAsync(Genre genre)
@@ -41,6 +46,10 @@ public class GenreRepository : IGenreRepository
             context.Genres.Update(item);
             await context.SaveChangesAsync();
         }
+        else
+        {
+            throw new InvalidOperationException($"No se encontro el registro con id: {id}");
+        }
     }
 
     public async Task DeleteAsyn(int id)
@@ -50,6 +59,10 @@ public class GenreRepository : IGenreRepository
         {
             context.Genres.Remove(item);
             await context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException($"No se encontro el registro con id: {id}");
         }
     }
 }
