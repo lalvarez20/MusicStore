@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MusicStore.Dto.Request;
 using MusicStore.Dto.Response;
 using MusicStore.Entities;
 using MusicStore.Repositories.interfaces;
@@ -22,7 +23,7 @@ namespace MusicStore.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = new BaseResponseGeneric<ICollection<Genre>>();
+            var response = new BaseResponseGeneric<ICollection<GenreResponseDto>>();
             try
             {
                 response.Data = await repository.GetAsync();
@@ -41,7 +42,7 @@ namespace MusicStore.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var response = new BaseResponseGeneric<Genre>();
+            var response = new BaseResponseGeneric<GenreResponseDto>();
             try
             {
                 response.Data = await repository.GetAsync(id);
@@ -58,15 +59,15 @@ namespace MusicStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Genre genre)
+        public async Task<IActionResult> Post(GenreRequestDto genre)
         {
             var response = new BaseResponseGeneric<int>();
             try
             {
-                await repository.AddAsync(genre);
-                response.Data = genre.Id;
+                var genreId = await repository.AddAsync(genre);
+                response.Data = genreId;
                 response.Success = true;
-                logger.LogInformation($"Género musical creado con id: {genre.Id}");
+                logger.LogInformation($"Género musical creado con id: {genreId}");
                 return StatusCode((int)HttpStatusCode.Created, response);
             }
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace MusicStore.Api.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put(int id, Genre genre)
+        public async Task<IActionResult> Put(int id, GenreRequestDto genre)
         {
             var response = new BaseResponse();
             try
