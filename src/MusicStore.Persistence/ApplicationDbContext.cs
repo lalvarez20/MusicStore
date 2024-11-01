@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicStore.Entities;
+using System.Reflection;
 
 namespace MusicStore.Persistence
 {
@@ -14,10 +15,12 @@ namespace MusicStore.Persistence
             base.OnModelCreating(modelBuilder);
 
             //Fluent API -> permite Personalización de conversion de Clases a Tablas
-            modelBuilder.Entity<Genre>().Property(x => x.Name).HasMaxLength(50);    // Se configura el valor maximo de NVarchar en la tabla
+            //modelBuilder.Entity<Genre>().Property(x => x.Name).HasMaxLength(50);    // Se configura el valor maximo de NVarchar en la tabla
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); //Se asegura de que se apliquen todas las congiguraciones del emsamblado actual
         }
 
         //Entities to Tables
-        public DbSet<Genre> Genres { get; set; }
+        //public DbSet<Genre> Genres { get; set; }
     }
 }
