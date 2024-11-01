@@ -12,8 +12,8 @@ using MusicStore.Persistence;
 namespace MusicStore.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241101223500_concert")]
-    partial class concert
+    [Migration("20241101230139_initial-with-shema-index")]
+    partial class initialwithshemaindex
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,9 @@ namespace MusicStore.Persistence.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Concert");
+                    b.HasIndex("Title");
+
+                    b.ToTable("Concert", "Musicales");
                 });
 
             modelBuilder.Entity("MusicStore.Entities.Genre", b =>
@@ -98,7 +100,7 @@ namespace MusicStore.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genre", "Musicales");
                 });
 
             modelBuilder.Entity("MusicStore.Entities.Concert", b =>

@@ -6,26 +6,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MusicStore.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class concert : Migration
+    public partial class initialwithshemaindex : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Genres",
-                table: "Genres");
+            migrationBuilder.EnsureSchema(
+                name: "Musicales");
 
-            migrationBuilder.RenameTable(
-                name: "Genres",
-                newName: "Genre");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Genre",
-                table: "Genre",
-                column: "Id");
+            migrationBuilder.CreateTable(
+                name: "Genre",
+                schema: "Musicales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genre", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Concert",
+                schema: "Musicales",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -47,6 +53,7 @@ namespace MusicStore.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_Concert_Genre_GenreId",
                         column: x => x.GenreId,
+                        principalSchema: "Musicales",
                         principalTable: "Genre",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -54,28 +61,27 @@ namespace MusicStore.Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Concert_GenreId",
+                schema: "Musicales",
                 table: "Concert",
                 column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Concert_Title",
+                schema: "Musicales",
+                table: "Concert",
+                column: "Title");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Concert");
+                name: "Concert",
+                schema: "Musicales");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Genre",
-                table: "Genre");
-
-            migrationBuilder.RenameTable(
+            migrationBuilder.DropTable(
                 name: "Genre",
-                newName: "Genres");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Genres",
-                table: "Genres",
-                column: "Id");
+                schema: "Musicales");
         }
     }
 }
