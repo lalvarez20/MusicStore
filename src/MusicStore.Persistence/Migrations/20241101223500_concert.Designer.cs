@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicStore.Persistence;
 
@@ -11,9 +12,11 @@ using MusicStore.Persistence;
 namespace MusicStore.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241101223500_concert")]
+    partial class concert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +77,7 @@ namespace MusicStore.Persistence.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.HasIndex("Title");
-
-                    b.ToTable("Concert", "Musicales");
+                    b.ToTable("Concert");
                 });
 
             modelBuilder.Entity("MusicStore.Entities.Genre", b =>
@@ -97,7 +98,7 @@ namespace MusicStore.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre", "Musicales");
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("MusicStore.Entities.Concert", b =>

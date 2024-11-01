@@ -17,6 +17,8 @@ namespace MusicStore.Persistence.Configurations
             builder.Property(x => x.ImageUrl)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            builder.HasIndex(x => x.Title);
+            builder.ToTable(nameof(Concert), "Musicales");
         }
     }
 }
