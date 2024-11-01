@@ -17,7 +17,9 @@ public class GenreRepository : IGenreRepository
     }
     public async Task<List<GenreResponseDto>> GetAsync()
     {
-        var items = await context.Genres.ToListAsync();
+        var items = await context.Set<Genre>()
+            .AsNoTracking()
+            .ToListAsync();
 
         //mapping Entity to Dto
         var response = items.Select(x => new GenreResponseDto
@@ -32,7 +34,9 @@ public class GenreRepository : IGenreRepository
 
     public async Task<GenreResponseDto?> GetAsync(int id) //el signo ? en el nombre del método indica que puede devolver un valor Nulo
     {
-        var item = await context.Genres.FirstOrDefaultAsync(x => x.Id == id); // FisrtOrDefault --> en caso no encuentre el Id enviado devuelve Nulo
+        var item = await context.Set<Genre>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id); // FisrtOrDefault --> en caso no encuentre el Id enviado devuelve Nulo
 
         if (item is not null)
             //mapping
@@ -54,20 +58,22 @@ public class GenreRepository : IGenreRepository
             Name = genreDto.Name,
             Status = genreDto.Status,
         };
-        context.Genres.Add(item);
+        context.Set<Genre>().Add(item);
         await context.SaveChangesAsync();
         return item.Id;
     }
 
     public async Task UpdateAsync(int id, GenreRequestDto genreDto)
     {
-        var item = await context.Genres.FirstOrDefaultAsync(x=> x.Id == id);
+        var item = await context.Set<Genre>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x=> x.Id == id);
         if (item is not null)  // Se prefiere el uso de is not null en lugar de !=
         {
             item.Name = genreDto.Name;
             item.Status = genreDto.Status;
 
-            context.Genres.Update(item);
+            context.Set<Genre>().Update(item);
             await context.SaveChangesAsync();
         }
         else
@@ -78,10 +84,12 @@ public class GenreRepository : IGenreRepository
 
     public async Task DeleteAsyn(int id)
     {
-        var item = await context.Genres.FirstOrDefaultAsync(x => x.Id == id);
+        var item = await context.Set<Genre>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id);
         if (item is not null)
         {
-            context.Genres.Remove(item);
+            context.Set<Genre>().Remove(item);
             await context.SaveChangesAsync();
         }
         else
