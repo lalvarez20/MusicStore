@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Region permite agrupar bloques de codigo
 #region Registering Services
 builder.Services.AddScoped<IGenreRepository, GenreRepository>(); // Se modifica la inyeción de dependencia cambiando a Scope y de agrega tanto la interface como la clase
+builder.Services.AddScoped<IConcertRepository, ConcertRepository>();
 #endregion
 
 var app = builder.Build();

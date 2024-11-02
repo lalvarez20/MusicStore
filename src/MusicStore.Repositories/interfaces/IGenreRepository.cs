@@ -1,14 +1,10 @@
-﻿using MusicStore.Dto.Request;
-using MusicStore.Dto.Response;
+﻿
+using MusicStore.Entities;
 
 namespace MusicStore.Repositories.interfaces
 {
-    public interface IGenreRepository
+    public interface IGenreRepository : IRepositoryBase<Genre>
     {
-        Task<int> AddAsync(GenreRequestDto genre);
-        Task DeleteAsyn(int id);
-        Task<List<GenreResponseDto>> GetAsync();
-        Task<GenreResponseDto?> GetAsync(int id);
-        Task UpdateAsync(int id, GenreRequestDto genre);
+
     }
 }
