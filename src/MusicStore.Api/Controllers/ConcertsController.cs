@@ -3,6 +3,7 @@ using MusicStore.Dto.Request;
 using MusicStore.Dto.Response;
 using MusicStore.Entities;
 using MusicStore.Repositories.interfaces;
+using System.Reflection;
 
 namespace MusicStore.Api.Controllers
 {
@@ -41,7 +42,7 @@ namespace MusicStore.Api.Controllers
                 TicketsQuantity = x.TicketsQuantity
             }).ToList();
 
-            return Ok(concerts);
+            return Ok(concertDB);
         }
 
         [HttpGet("title")]
@@ -50,26 +51,8 @@ namespace MusicStore.Api.Controllers
             var response = new BaseResponseGeneric<ICollection<ConcertResponseDto>>();
             try
             {
-                //mapping
-                var concertsDb = await repository.GetAsync(x => x.Title.Contains(title ?? string.Empty), x => x.DateEvent);
-                var concertsDTO = concertsDb.Select(x => new ConcertResponseDto
-                {
-                    Title = x.Title,
-                    Description = x.Description,
-                    Place = x.Place,
-                    UnitPrice = x.UnitPrice,
-                    GenreId = x.GenreId,
-                    DateEvent = x.DateEvent,
-                    ImageUrl = x.ImageUrl,
-                    TicketsQuantity = x.TicketsQuantity,
-                    Finalized = x.Finalized
-                }).ToList();
-
-                response.Success = true;
-                response.Data = concertsDTO;
-
-                logger.LogInformation("Obteniendo todos los conciertos");
-                return Ok(response);
+                var info = await repository.GetAsync(title);
+                return Ok(info);
             }
             catch (Exception ex)
             {

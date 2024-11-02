@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicStore.Entities;
+using MusicStore.Entities.info;
 using System.Reflection;
 
 namespace MusicStore.Persistence
@@ -18,9 +19,18 @@ namespace MusicStore.Persistence
             //modelBuilder.Entity<Genre>().Property(x => x.Name).HasMaxLength(50);    // Se configura el valor maximo de NVarchar en la tabla
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); //Se asegura de que se apliquen todas las congiguraciones del emsamblado actual
+            modelBuilder.Ignore<ConcertInfo>();
         }
 
         //Entities to Tables
         //public DbSet<Genre> Genres { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseLazyLoadingProxies();
+            }
+        }
     }
 }

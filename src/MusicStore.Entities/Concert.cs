@@ -13,6 +13,6 @@ namespace MusicStore.Entities
         public int TicketsQuantity { get; set; }
         public bool Finalized { get; set; }
         //Navigatins properties
-        public Genre Genre { get; set; } = default!;
+        public virtual Genre Genre { get; set; } = default!;
     }
 }
