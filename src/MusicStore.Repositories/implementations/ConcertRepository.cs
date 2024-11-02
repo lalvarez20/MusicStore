@@ -47,27 +47,30 @@ namespace MusicStore.Repositories.implementations
             //    .ToListAsync();
 
             //lazzy loading --> NO se coloca el include. El propio framwork detecta las relaciones y trae la data
-            return await context.Set<Concert>()
-                //.Include(x => x.Genre)
-                .Where(x => x.Title.Contains(title ?? string.Empty))
-                .AsNoTracking()
-                .Select(x => new ConcertInfo
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Description = x.Description,
-                    Place = x.Place,
-                    UnitPrice = x.UnitPrice,
-                    GenreName = x.Genre.Name,
-                    GenreId = x.Genre.Id,
-                    DateEvent = x.DateEvent.ToShortDateString(),
-                    TimeEvent = x.DateEvent.ToShortTimeString(),
-                    ImageUrl = x.ImageUrl,
-                    TicketsQuantity = x.TicketsQuantity,
-                    Finalized = x.Finalized,
-                    Status = x.Status ? "Activo" : "Inactivo"
-                })
-                .ToListAsync();
+            //return await context.Set<Concert>()
+            //    //.Include(x => x.Genre)
+            //    .Where(x => x.Title.Contains(title ?? string.Empty))
+            //    .AsNoTracking()
+            //    .Select(x => new ConcertInfo
+            //    {
+            //        Id = x.Id,
+            //        Title = x.Title,
+            //        Description = x.Description,
+            //        Place = x.Place,
+            //        UnitPrice = x.UnitPrice,
+            //        GenreName = x.Genre.Name,
+            //        GenreId = x.Genre.Id,
+            //        DateEvent = x.DateEvent.ToShortDateString(),
+            //        TimeEvent = x.DateEvent.ToShortTimeString(),
+            //        ImageUrl = x.ImageUrl,
+            //        TicketsQuantity = x.TicketsQuantity,
+            //        Finalized = x.Finalized,
+            //        Status = x.Status ? "Activo" : "Inactivo"
+            //    })
+            //    .ToListAsync();
+
+            var query = context.Set<ConcertInfo>().FromSqlRaw("usp {0}", title ?? string.Empty);
+            return await query.ToListAsync();
         }
     }
 }
