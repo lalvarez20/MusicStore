@@ -1,7 +1,12 @@
-﻿
-namespace MusicStore.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MusicStore.Dto.Request
 {
-    public class Concert : EntityBase
+    public class ConcertRequestDto
     {
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
@@ -11,8 +16,5 @@ namespace MusicStore.Entities
         public DateTime DateEvent { get; set; }
         public string? ImageUrl { get; set; }
         public int TicketsQuantity { get; set; }
-        public bool Finalized { get; set; }
-        //Navigatins properties
-        public virtual Genre Genre { get; set; } = default!;
     }
 }
