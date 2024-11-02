@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +20,7 @@
     <ProjectReference Include="..\MusicStore.Dto\MusicStore.Dto.csproj" />
     <ProjectReference Include="..\MusicStore.Persistence\MusicStore.Persistence.csproj" />
     <ProjectReference Include="..\MusicStore.Repositories\MusicStore.Repositories.csproj" />
+    <ProjectReference Include="..\MusicStore.Service\MusicStore.Service.csproj" />
   </ItemGroup>
 
 </Project>

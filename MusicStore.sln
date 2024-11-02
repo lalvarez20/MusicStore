@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore.Repositories", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore.Persistence", "src\MusicStore.Persistence\MusicStore.Persistence.csproj", "{2F46B613-8A15-4DA8-8E7A-A4D1ABA28C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Dto", "src\MusicStore.Dto\MusicStore.Dto.csproj", "{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore.Dto", "src\MusicStore.Dto\MusicStore.Dto.csproj", "{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStore.Service", "src\MusicStore.Service\MusicStore.Service.csproj", "{2CB0F357-7575-48B0-80C1-A1BFF64B080C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB0F357-7575-48B0-80C1-A1BFF64B080C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB0F357-7575-48B0-80C1-A1BFF64B080C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB0F357-7575-48B0-80C1-A1BFF64B080C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB0F357-7575-48B0-80C1-A1BFF64B080C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{89D10C4B-B359-49B9-BAC7-3B50A81FD3D0} = {0AC9682A-C186-4C31-B00A-FE0B218CBCFF}
 		{2F46B613-8A15-4DA8-8E7A-A4D1ABA28C01} = {0AC9682A-C186-4C31-B00A-FE0B218CBCFF}
 		{1EFF9AD0-4FCB-48F9-88CF-D2003C0E8769} = {0AC9682A-C186-4C31-B00A-FE0B218CBCFF}
+		{2CB0F357-7575-48B0-80C1-A1BFF64B080C} = {0AC9682A-C186-4C31-B00A-FE0B218CBCFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ABF73297-059E-4B18-A5E6-45F666A0690F}
