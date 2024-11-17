@@ -20,7 +20,7 @@ namespace MusicStore.Persistence
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); //Se asegura de que se apliquen todas las congiguraciones del emsamblado actual
             modelBuilder.Ignore<ConcertInfo>();
-            modelBuilder.Entity<ConcertInfo>().HasNoKey();
+            //modelBuilder.Entity<ConcertInfo>().HasNoKey();
         }
 
         //Entities to Tables
