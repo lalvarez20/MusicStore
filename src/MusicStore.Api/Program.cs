@@ -26,11 +26,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IGenreRepository, GenreRepository>(); // Se modifica la inyeción de dependencia cambiando a Scope y de agrega tanto la interface como la clase
 builder.Services.AddScoped<IConcertRepository, ConcertRepository>();
 builder.Services.AddScoped<IConcertService, ConcertService>();
+builder.Services.AddScoped<IGenreService, GenreService>();
 
 builder.Services.AddAutoMapper(config =>
 {
     //Añadir perfiles de mapeo
     config.AddProfile<ConcertProfile>();
+    config.AddProfile<GenreProfile>();
 });
 #endregion
 
