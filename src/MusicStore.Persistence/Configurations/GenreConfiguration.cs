@@ -10,6 +10,7 @@ namespace MusicStore.Persistence.Configurations
         {
             builder.Property(x => x.Name).HasMaxLength(50); // Se personaliza el valor maximo de NVarchar en la tabla
             builder.ToTable("Genre", "Musicales");  //Personalización de nombre de la tabla y se añade el schema Musicales
+            builder.HasQueryFilter(x => x.Status); // Se aplica filtro global para que considere Solo los Status TRUE
         }
     }
 }

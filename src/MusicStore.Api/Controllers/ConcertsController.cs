@@ -30,7 +30,7 @@ namespace MusicStore.Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var response = await service.GetAsync(id);
-            return response.Success ? Ok(response) : BadRequest(response);
+            return response.Success ? Ok(response) : NotFound(response);
         }
 
         [HttpPost]

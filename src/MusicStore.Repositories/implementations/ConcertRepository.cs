@@ -50,6 +50,7 @@ namespace MusicStore.Repositories.implementations
             return await context.Set<Concert>()
                 //.Include(x => x.Genre)
                 .Where(x => x.Title.Contains(title ?? string.Empty))
+                .IgnoreQueryFilters()  // Permite ingorar el queryFilter de las entidades relacionadas
                 .AsNoTracking()
                 .Select(x => new ConcertInfo
                 {

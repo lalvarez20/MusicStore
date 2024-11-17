@@ -51,7 +51,7 @@ namespace MusicStore.Service.implementations
             {
                 var data = await repository.GetAsync(id);
                 response.Data =mapper.Map<ConcertResponseDto>(data);
-                response.Success = true;
+                response.Success = data is not null;
 
                 logger.LogInformation($"Obteniendo los datos por id: {id}");
             }
